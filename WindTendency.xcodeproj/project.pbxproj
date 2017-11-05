@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		600AF24D1FAEBC75005464FC /* UsedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600AF24C1FAEBC75005464FC /* UsedColors.swift */; };
+		600AF24F1FAECB34005464FC /* WindDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600AF24E1FAECB34005464FC /* WindDataTableViewCell.swift */; };
 		601B20661F9AAF8200DB8C8B /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601B20651F9AAF8200DB8C8B /* LineChart.swift */; };
 		601B20681F9AAF9700DB8C8B /* CircleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601B20671F9AAF9700DB8C8B /* CircleChart.swift */; };
 		601B206A1F9B405B00DB8C8B /* CircleChartPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601B20691F9B405A00DB8C8B /* CircleChartPoint.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		600AF24C1FAEBC75005464FC /* UsedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedColors.swift; sourceTree = "<group>"; };
+		600AF24E1FAECB34005464FC /* WindDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindDataTableViewCell.swift; sourceTree = "<group>"; };
 		601B20651F9AAF8200DB8C8B /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		601B20671F9AAF9700DB8C8B /* CircleChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChart.swift; sourceTree = "<group>"; };
 		601B20691F9B405A00DB8C8B /* CircleChartPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChartPoint.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 				6023F1401F92C28000D6581D /* Accessories.swift */,
 				601B20651F9AAF8200DB8C8B /* LineChart.swift */,
 				601B20671F9AAF9700DB8C8B /* CircleChart.swift */,
+				600AF24C1FAEBC75005464FC /* UsedColors.swift */,
+				600AF24E1FAECB34005464FC /* WindDataTableViewCell.swift */,
 			);
 			path = WindTendency;
 			sourceTree = "<group>";
@@ -155,8 +161,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				601B20681F9AAF9700DB8C8B /* CircleChart.swift in Sources */,
+				600AF24F1FAECB34005464FC /* WindDataTableViewCell.swift in Sources */,
 				6023F1411F92C28000D6581D /* Accessories.swift in Sources */,
 				6023F13F1F92003F00D6581D /* WindData.swift in Sources */,
+				600AF24D1FAEBC75005464FC /* UsedColors.swift in Sources */,
 				601B20661F9AAF8200DB8C8B /* LineChart.swift in Sources */,
 				6023F12C1F91FFD100D6581D /* ViewController.swift in Sources */,
 				6023F12A1F91FFD100D6581D /* AppDelegate.swift in Sources */,

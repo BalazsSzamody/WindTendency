@@ -119,7 +119,6 @@ class CircleChart: UIView {
         }
         
         CircleChart.max = ceil(CircleChart.max / CircleChart.delta) * CircleChart.delta
-        print("Max: ",CircleChart.max)
         setTransform()
     }
     
@@ -252,7 +251,6 @@ class CircleChart: UIView {
         let dateMax = dates.max()!
         let dateMin = dates.min()!
         let axisStartDate = dateMax.addingTimeInterval(-TimeInterval(CircleChart.max))
-        print(dateMax.timeIntervalSince(dateMin))
         for entry in input{
             let length = entry.date.timeIntervalSince(axisStartDate) / dateMax.timeIntervalSince(axisStartDate)
             
