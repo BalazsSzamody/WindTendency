@@ -18,7 +18,10 @@ class WindDataTableViewCell: UITableViewCell {
             guard let windData = windData else { return }
             directionLabel.text = "\(windData.direction)"
             speedLabel.text = "\(windData.speed)"
-            dateLabel.text = "\(windData.date)"
+            
+            let dateString = formatDate(windData.date)
+            print(dateString)
+            dateLabel.text = dateString
         }
     }
     
@@ -32,5 +35,12 @@ class WindDataTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter =  DateFormatter()
+        dateFormatter.locale = Locale(identifier: "hu_HU")
+        dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm, YYYYMMMMd")
+        
+        return dateFormatter.string(from: date)
+    }
 }

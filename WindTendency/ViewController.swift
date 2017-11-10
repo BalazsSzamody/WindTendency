@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var lineChart: LineChart!
     @IBOutlet weak var circleChart: CircleChart!
     @IBOutlet weak var newEntryView: UIView!
-    @IBOutlet var newEntryTapRecogniser: UITapGestureRecognizer!
     @IBOutlet weak var directionPickerView: UIPickerView!
     @IBOutlet weak var speedPickerView: UIPickerView!
     @IBOutlet weak var dataTableButton: UIButton!
@@ -51,7 +50,6 @@ class ViewController: UIViewController {
         circleChart.backgroundColor = UsedColors.graphBackgroundColor
         lineChart.backgroundColor = UsedColors.graphBackgroundColor
         newEntryView.isHidden = true
-        newEntryTapRecogniser.isEnabled = false
         pickerProtocolSetup()
         windData = []
         windDataTableView.delegate = self
@@ -63,46 +61,43 @@ class ViewController: UIViewController {
         
         
     }
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if !newEntryView.isHidden && touch?.view != newEntryView {
+            newEntryIsVisible()
+        } else if !windDataTableView.isHidden && touch?.view != windDataTableView {
+            tableViewIsVisible()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     @IBAction func newButtonPressed(_ sender: UIButton) {
         newEntryView.isHidden = false
-        newEntryTapRecogniser.isEnabled = true
+        
         entryDate = Date()
      }
     
-    @IBAction func newEntryTap(_ sender: Any) {
-        // See tap actions extension
-        newEntryTapRecogniser.isEnabled = false
-        if !newEntryView.isHidden {
-            newEntryIsVisible()
-        } else if !windDataTableView.isHidden {
-            tableViewIsVisible()
-        }
-        
-        
-    }
+    
     @IBAction func addButtonPressed(_ sender: Any) {
         guard let date = entryDate, let direction = entryDirection, let speed = entrySpeed else {
-            newEntryTap(sender)
+            newEntryIsVisible()
             return
         }
         windData.append(WindData(rawDirection: direction, speed: speed, date: date))
-        newEntryTap(sender)
+        newEntryIsVisible()
     }
     @IBAction func resetButtonPressed(_ sender: Any) {
         windData = []
-        newEntryTap(sender)
+        newEntryIsVisible()
     }
     
     @IBAction func dataTableButtonPressed(_ sender: Any) {
         windDataTableView.reloadData()
         windDataTableView.isHidden = false
         dataTableButton.isHidden = true
-        newEntryTapRecogniser.isEnabled = true
     }
     
     
@@ -348,6 +343,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController {
     //Tap actions
+    
     func newEntryIsVisible() {
         newEntryView.isHidden = true
         entryDate = nil

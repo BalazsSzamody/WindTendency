@@ -39,6 +39,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7k-CM-JU6" customClass="LineChart" customModule="WindTendency" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="395" width="375" height="232"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eim-Fl-qEY" userLabel="ButtonView">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
@@ -142,9 +143,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W04-va-CyP">
-                                                    <rect key="frame" x="247" y="11" width="83" height="21"/>
+                                                    <rect key="frame" x="185" y="11" width="145" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -188,27 +189,18 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zK9-1v-qlz" secondAttribute="trailing" id="oTq-Yv-iuR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="x6n-tu-jWy" appends="YES" id="KOL-hO-yg0"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="circleChart" destination="zK9-1v-qlz" id="P42-2H-y3n"/>
                         <outlet property="dataTableButton" destination="jrY-vE-ScA" id="EdB-RF-D9a"/>
                         <outlet property="directionPickerView" destination="bLe-in-lJ4" id="vK6-7e-t9N"/>
                         <outlet property="lineChart" destination="r7k-CM-JU6" id="vxI-81-Sg5"/>
-                        <outlet property="newEntryTapRecogniser" destination="x6n-tu-jWy" id="YUV-c8-0uQ"/>
                         <outlet property="newEntryView" destination="VHz-MN-oUp" id="6NA-Cj-Ds5"/>
                         <outlet property="speedPickerView" destination="4sl-K1-pCe" id="YBU-zu-Nkx"/>
                         <outlet property="windDataTableView" destination="YD1-qR-Fyc" id="344-Tb-cnf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="x6n-tu-jWy">
-                    <connections>
-                        <action selector="newEntryTap:" destination="BYZ-38-t0r" id="I9O-jf-F77"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="117.39130434782609"/>
         </scene>
