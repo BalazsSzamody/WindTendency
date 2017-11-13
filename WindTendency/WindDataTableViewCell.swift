@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+
+
 class WindDataTableViewCell: UITableViewCell {
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
@@ -19,8 +22,7 @@ class WindDataTableViewCell: UITableViewCell {
             directionLabel.text = "\(windData.direction)"
             speedLabel.text = "\(windData.speed)"
             
-            let dateString = formatDate(windData.date)
-            dateLabel.text = dateString
+            dateLabel.text = windData.formatDate(format: .letters)
         }
     }
     
@@ -38,7 +40,7 @@ class WindDataTableViewCell: UITableViewCell {
     func formatDate(_ date: Date) -> String {
         let dateFormatter =  DateFormatter()
         dateFormatter.locale = Locale(identifier: "hu_HU")
-        dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm, YYYYMMMMd")
+        dateFormatter.setLocalizedDateFormatFromTemplate(DateFormats.letters.rawValue)
         
         return dateFormatter.string(from: date)
     }

@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+enum DateFormats: String {
+    case letters = "HH:mm, YYYYMMMMd"
+    case numbersOnly = "HH:mm, YYYYMMdd"
+    case fileName = "YY_MM_dd_HH_mm"
+}
+
 extension CGPoint {
     init(angle rawAngle: CGFloat, length: CGFloat) {
         let angleDegree = rawAngle.truncatingRemainder(dividingBy: 90)

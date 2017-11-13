@@ -10,11 +10,11 @@ import Foundation
 
 struct WindDataJSON{
     
-    let currentJSON: String!
+    let json: String!
     
     init(_ allWindData: [WindData]) {
        let jsonObjects = WindDataJSON.convertToJSONObject(allWindData) as AnyObject
-        currentJSON = WindDataJSON.jsonStringify(jsonObjects, prettyPrinted: true)
+        json = WindDataJSON.jsonStringify(jsonObjects, prettyPrinted: true)
     }
     
    private static func convertToWindDataDict(_ windData: WindData) -> [String:Any] {

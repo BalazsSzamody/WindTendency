@@ -103,9 +103,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func jsonButtonPressed(_ sender: Any) {
-        json = WindDataJSON(windData)
-        guard let json = json else { return }
-        print(json.currentJSON)
+        exportWindData(sender)
     }
     
     func chartWind(_ windData: [WindData]) {
@@ -361,5 +359,28 @@ extension ViewController {
     func tableViewIsVisible() {
         windDataTableView.isHidden = true
         dataTableButton.isHidden = false
+    }
+}
+
+extension ViewController {
+    func exportWindData(_ sender: Any) {
+        let convertedWindData = WindData.convertToJSONObject(windData) as AnyObject
+        let json = WindData.jsonStringify(convertedWindData)
+        guard let saveURL = WindData.exportToFileURL(json) else {
+            print("Saving Failed")
+            return
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: [saveURL], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+            print("Activity:", activity, " Success:", success, " Items:", items, " Error:", error)
+            do{
+                try FileManager.default.removeItem(at: saveURL)
+                print("File deleted")
+            } catch {
+                print("File not deleted")
+            }
+        }
+        present(activityViewController, animated: true, completion: nil)
     }
 }

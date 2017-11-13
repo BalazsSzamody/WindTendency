@@ -4,6 +4,23 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Javascript Object Notation</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.Fr3qfly.WindTendency.json</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -40,6 +57,32 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string>Javascript Object Notation</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.Fr3qfly.WindTendency.json</string>
+			<key>UTTypeSize320IconFile</key>
+			<string>WindTendency_20pt@1x</string>
+			<key>UTTypeSize64IconFile</key>
+			<string>WindTendency_20pt@1x</string>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string>Javascript Object Notation</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.Fr3qfly.WindTendency.json</string>
+			<key>UTTypeSize320IconFile</key>
+			<string>WindTendency_20pt@1x</string>
+			<key>UTTypeSize64IconFile</key>
+			<string>WindTendency_20pt@1x</string>
+		</dict>
 	</array>
 </dict>
 </plist>

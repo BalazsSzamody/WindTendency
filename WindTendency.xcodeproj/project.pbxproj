@@ -21,6 +21,7 @@
 		6023F1371F91FFD100D6581D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6023F1351F91FFD100D6581D /* LaunchScreen.storyboard */; };
 		6023F13F1F92003F00D6581D /* WindData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023F13E1F92003F00D6581D /* WindData.swift */; };
 		6023F1411F92C28000D6581D /* Accessories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023F1401F92C28000D6581D /* Accessories.swift */; };
+		608BED941FB978F800BE43B2 /* WindTendency_20pt@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 608BED931FB978F800BE43B2 /* WindTendency_20pt@1x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		6023F1381F91FFD100D6581D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6023F13E1F92003F00D6581D /* WindData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindData.swift; sourceTree = "<group>"; };
 		6023F1401F92C28000D6581D /* Accessories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessories.swift; sourceTree = "<group>"; };
+		608BED931FB978F800BE43B2 /* WindTendency_20pt@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WindTendency_20pt@1x.png"; path = "Resources/WindTendency_20pt@1x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		6023F11D1F91FFD100D6581D = {
 			isa = PBXGroup;
 			children = (
+				608BED931FB978F800BE43B2 /* WindTendency_20pt@1x.png */,
 				6023F1281F91FFD100D6581D /* WindTendency */,
 				6023F1271F91FFD100D6581D /* Products */,
 			);
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6023F1371F91FFD100D6581D /* LaunchScreen.storyboard in Resources */,
+				608BED941FB978F800BE43B2 /* WindTendency_20pt@1x.png in Resources */,
 				6023F1341F91FFD100D6581D /* Assets.xcassets in Resources */,
 				6023F12F1F91FFD100D6581D /* Main.storyboard in Resources */,
 			);
