@@ -38,7 +38,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    var json: WindDataJSON?
     
     var entryDate: Date?
     var entryDirection: CGFloat?
