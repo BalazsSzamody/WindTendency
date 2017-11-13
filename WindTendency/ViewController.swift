@@ -38,6 +38,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    var json: WindDataJSON?
     
     var entryDate: Date?
     var entryDirection: CGFloat?
@@ -59,6 +60,7 @@ class ViewController: UIViewController {
         windDataTableView.layer.borderColor = UsedColors.darkOrange.cgColor
         windDataTableView.layer.borderWidth = 2
         
+        windData = windDataSimulation(dataCount: 30, directionAlgo: followingRandom(_:), startAngle: 10, speedAlgo: followingRandom(_:), startSpeed: 10)
         
     }
     
@@ -100,6 +102,11 @@ class ViewController: UIViewController {
         dataTableButton.isHidden = true
     }
     
+    @IBAction func jsonButtonPressed(_ sender: Any) {
+        json = WindDataJSON(windData)
+        guard let json = json else { return }
+        print(json.currentJSON)
+    }
     
     func chartWind(_ windData: [WindData]) {
         lineChart.plot(windData)

@@ -20,7 +20,6 @@ class WindDataTableViewCell: UITableViewCell {
             speedLabel.text = "\(windData.speed)"
             
             let dateString = formatDate(windData.date)
-            print(dateString)
             dateLabel.text = dateString
         }
     }
