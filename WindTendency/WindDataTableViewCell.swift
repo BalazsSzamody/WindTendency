@@ -16,7 +16,7 @@ class WindDataTableViewCell: UITableViewCell {
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var windData: WindData? {
+    var windData: MeasurementData? {
         didSet{
             guard let windData = windData else { return }
             directionLabel.text = "\(windData.direction)"

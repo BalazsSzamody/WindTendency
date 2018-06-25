@@ -64,7 +64,7 @@ class CircleChart: UIView {
         return -CircleChart.max
     }
     
-    var data: [WindData]?
+    var data: [MeasurementData]?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,7 +99,7 @@ class CircleChart: UIView {
         }
     }
     
-    func setAxisRange(forData data: [WindData]) {
+    func setAxisRange(forData data: [MeasurementData]) {
         guard !data.isEmpty else { return }
         
         let dates = data.map() { $0.date }
@@ -203,7 +203,7 @@ class CircleChart: UIView {
         context.restoreGState()
     }
     
-    func plot(_ points: [WindData]) {
+    func plot(_ points: [MeasurementData]) {
         lineLayer.path = nil
         circleLayer.path = nil
         
@@ -241,7 +241,7 @@ class CircleChart: UIView {
         return path
     }
     
-    func convertToPoint(_ input: [WindData]?) -> [CGPoint]? {
+    func convertToPoint(_ input: [MeasurementData]?) -> [CGPoint]? {
         guard let input = input else { return nil }
         guard !input.isEmpty else { return nil }
         var points: [CGPoint] = []
@@ -249,7 +249,7 @@ class CircleChart: UIView {
         
         let dates = input.map() { $0.date }
         let dateMax = dates.max()!
-        let dateMin = dates.min()!
+        //let dateMin = dates.min()!
         let axisStartDate = dateMax.addingTimeInterval(-TimeInterval(CircleChart.max))
         for entry in input{
             let length = entry.date.timeIntervalSince(axisStartDate) / dateMax.timeIntervalSince(axisStartDate)

@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 
-struct WindData {
+struct AllData: Codable {
+    let spotName: String
+    let windData: [MeasurementData]
+}
+
+struct MeasurementData: Codable {
     let direction: CGFloat
     let speed: CGFloat
     let date: Date
     
+    static var jsonFromURL: [String : AnyObject]? = [:]
+    
     init(rawDirection: CGFloat, speed: CGFloat, date: Date) {
-        direction = WindData.setDirection(rawDirection)
+        direction = MeasurementData.setDirection(rawDirection)
         self.speed = speed
         self.date = date
     }
@@ -31,7 +38,7 @@ struct WindData {
             return rawDirection
         }
     }
-    static func convertDirection(_ windData: [WindData]) -> [CircleChartPoint]? {
+    static func convertDirection(_ windData: [MeasurementData]) -> [CircleChartPoint]? {
         guard !windData.isEmpty else { return nil }
         var points: [CircleChartPoint] = []
         
@@ -41,7 +48,7 @@ struct WindData {
         return points
     }
     
-    static func convertSpeed(_ windData: [WindData]) -> [CGPoint]? {
+    static func convertSpeed(_ windData: [MeasurementData]) -> [CGPoint]? {
         guard !windData.isEmpty else { return nil }
         var points: [CGPoint] = []
         let startDate = windData[0].date
@@ -70,11 +77,20 @@ struct WindData {
         
         return dateFormatter.string(from: date)
     }
+    
+    static func formatDate(_ string: String) -> Date? {
+        let dateFormatter =  DateFormatter()
+        dateFormatter.locale = Locale(identifier: "hu_HU")
+        //dateFormatter.setLocalizedDateFormatFromTemplate(format.rawValue)
+        
+        guard let date = dateFormatter.date(from: string) else { return nil }
+        return date
+    }
 }
 
-extension WindData {
+extension MeasurementData {
     //JSON conversion
-    static func convertToWindDataDict(_ windData: WindData) -> [String:Any] {
+    static func convertToWindDataDict(_ windData: MeasurementData) -> [String:Any] {
         var windDict: [String:Any] = [:]
         windDict["direction"] = windData.direction as Any
         windDict["speed"] = windData.speed as Any
@@ -82,13 +98,13 @@ extension WindData {
         return windDict
     }
     
-    static func convertToJSONObject(_ allWindData: [WindData]) -> [Any] {
+    static func convertToJSONObject(_ allWindData: [MeasurementData]) -> [String : Any] {
         var json: [Any] = []
         for winData in allWindData {
             json.append(convertToWindDataDict(winData) as Any)
         }
         
-        return json
+        return ["windData" : json] as [String : Any]
     }
     
     static func jsonStringify(_ data: AnyObject, prettyPrinted: Bool = false) -> String {
@@ -109,18 +125,98 @@ extension WindData {
     }
 }
 //Export - Import
-extension WindData {
-    static func importData(from url: URL) {
+extension MeasurementData {
+    static func importWindData(from url: URL) -> [MeasurementData]?{
+        guard let nsDictionary = NSDictionary(contentsOf: url) else {
+            print("ns dictionary creation failed")
+            return nil }
+        print(nsDictionary.allKeys)
+        guard let dictionary = nsDictionary as? [String:AnyObject] else { return nil }
+        print(dictionary)
+        guard let json = dictionary["windData"] as? [AnyObject] else { return nil }
+        print(json)
+        var allWindData: [MeasurementData] = []
+        for object in json {
+            guard let dateString = object["date"] as? String,
+                let date = formatDate(dateString),
+                let speed = object["speed"] as? CGFloat,
+                let direction = object["direction"] as? CGFloat else { return nil }
+            
+            allWindData.append(MeasurementData(rawDirection: direction, speed: speed, date: date))
+        }
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print("Failed to delete file at: \(url)")
+        }
         
+        return allWindData
     }
     
-    static func exportToFileURL(_ data: String) -> URL? {
-        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+    static func importWithURLSession(from url: URL, completion: (_ url: URL) -> [MeasurementData]?) -> [MeasurementData]? {
+        let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
         
-        let date = formatDate(at: Date(), format: .fileName)
-        let saveFileURL = path.appendingPathComponent("\(date).json")
+        var resultData: [String:AnyObject]? = nil
+        
+        let task = defaultSession.dataTask(with: url) {(data, response, error) in
+            if let error = error {
+                print(error)
+                return
+            } else {
+                guard let data = data else {
+                    print("No data")
+                    return
+                }
+                
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers ) as? [String:AnyObject] else {
+                    print("data not json")
+                    return
+                }
+                MeasurementData.jsonFromURL = json
+            }
+        }
+        
+        task.resume()
+        
+        return completion(url)
+    }
+    
+    static func handleImportedJSON(_ url: URL) -> [MeasurementData]? {
+        guard let json = jsonFromURL?["windData"]  as? [AnyObject] else {
+            
+            print("no resultData")
+            print(jsonFromURL ?? "nil")
+            return nil
+        }
+        var allWindData: [MeasurementData] = []
+        for object in json {
+            guard let dateString = object["date"] as? String,
+                let date = formatDate(dateString),
+                let speed = object["speed"] as? CGFloat,
+                let direction = object["direction"] as? CGFloat else { return nil }
+            
+            allWindData.append(MeasurementData(rawDirection: direction, speed: speed, date: date))
+        }
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print("Failed to delete file at: \(url)")
+        }
+        
+        return allWindData
+    }
+    
+    static func exportJSON(_ allWindData: [MeasurementData]) -> URL? {
+        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil}
+        
+        var _: NSErrorPointer
+        let fileName = formatDate(at: Date(), format: .fileName) + ".json"
+        let jsonObject = convertToJSONObject(allWindData)
+        let jsonString = jsonStringify(jsonObject as AnyObject)
+        let saveFileURL = path.appendingPathComponent(fileName)
+        
         do{
-            try (data as NSString).write(to: saveFileURL, atomically: true, encoding: 1)
+            try (jsonString as NSString).write(to: saveFileURL, atomically: true, encoding: 1)
         }catch{
             print(error)
             print("write failed")

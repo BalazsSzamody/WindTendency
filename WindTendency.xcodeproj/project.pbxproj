@@ -18,9 +18,13 @@
 		6023F1321F91FFD100D6581D /* WindTendency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6023F1301F91FFD100D6581D /* WindTendency.xcdatamodeld */; };
 		6023F1341F91FFD100D6581D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6023F1331F91FFD100D6581D /* Assets.xcassets */; };
 		6023F1371F91FFD100D6581D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6023F1351F91FFD100D6581D /* LaunchScreen.storyboard */; };
-		6023F13F1F92003F00D6581D /* WindData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023F13E1F92003F00D6581D /* WindData.swift */; };
+		6023F13F1F92003F00D6581D /* MeasurementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023F13E1F92003F00D6581D /* MeasurementData.swift */; };
 		6023F1411F92C28000D6581D /* Accessories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6023F1401F92C28000D6581D /* Accessories.swift */; };
+		6065C14620DCA3A600FD9F75 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6065C14420DCA3A500FD9F75 /* RxSwift.framework */; };
+		6065C14720DCA3A600FD9F75 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6065C14520DCA3A600FD9F75 /* RxCocoa.framework */; };
 		608BED941FB978F800BE43B2 /* WindTendency_20pt@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 608BED931FB978F800BE43B2 /* WindTendency_20pt@1x.png */; };
+		60AEE68E20DC647700AC61AD /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AEE68D20DC647700AC61AD /* DataHandler.swift */; };
+		60AEE69120DC6C0300AC61AD /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AEE69020DC6C0300AC61AD /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,9 +41,13 @@
 		6023F1331F91FFD100D6581D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6023F1361F91FFD100D6581D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6023F1381F91FFD100D6581D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6023F13E1F92003F00D6581D /* WindData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindData.swift; sourceTree = "<group>"; };
+		6023F13E1F92003F00D6581D /* MeasurementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementData.swift; sourceTree = "<group>"; };
 		6023F1401F92C28000D6581D /* Accessories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessories.swift; sourceTree = "<group>"; };
+		6065C14420DCA3A500FD9F75 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		6065C14520DCA3A600FD9F75 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		608BED931FB978F800BE43B2 /* WindTendency_20pt@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WindTendency_20pt@1x.png"; path = "Resources/WindTendency_20pt@1x.png"; sourceTree = "<group>"; };
+		60AEE68D20DC647700AC61AD /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		60AEE69020DC6C0300AC61AD /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6065C14620DCA3A600FD9F75 /* RxSwift.framework in Frameworks */,
+				6065C14720DCA3A600FD9F75 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +69,7 @@
 				608BED931FB978F800BE43B2 /* WindTendency_20pt@1x.png */,
 				6023F1281F91FFD100D6581D /* WindTendency */,
 				6023F1271F91FFD100D6581D /* Products */,
+				6065C14320DCA3A300FD9F75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +84,8 @@
 		6023F1281F91FFD100D6581D /* WindTendency */ = {
 			isa = PBXGroup;
 			children = (
+				6065C14920E0E22900FD9F75 /* Model */,
+				60AEE68F20DC6BDC00AC61AD /* Extensions */,
 				6023F1291F91FFD100D6581D /* AppDelegate.swift */,
 				6023F12B1F91FFD100D6581D /* ViewController.swift */,
 				6023F12D1F91FFD100D6581D /* Main.storyboard */,
@@ -80,15 +93,40 @@
 				6023F1351F91FFD100D6581D /* LaunchScreen.storyboard */,
 				6023F1381F91FFD100D6581D /* Info.plist */,
 				6023F1301F91FFD100D6581D /* WindTendency.xcdatamodeld */,
-				6023F13E1F92003F00D6581D /* WindData.swift */,
+				6023F13E1F92003F00D6581D /* MeasurementData.swift */,
 				601B20691F9B405A00DB8C8B /* CircleChartPoint.swift */,
 				6023F1401F92C28000D6581D /* Accessories.swift */,
 				601B20651F9AAF8200DB8C8B /* LineChart.swift */,
 				601B20671F9AAF9700DB8C8B /* CircleChart.swift */,
 				600AF24C1FAEBC75005464FC /* UsedColors.swift */,
 				600AF24E1FAECB34005464FC /* WindDataTableViewCell.swift */,
+				60AEE68D20DC647700AC61AD /* DataHandler.swift */,
 			);
 			path = WindTendency;
+			sourceTree = "<group>";
+		};
+		6065C14320DCA3A300FD9F75 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6065C14520DCA3A600FD9F75 /* RxCocoa.framework */,
+				6065C14420DCA3A500FD9F75 /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6065C14920E0E22900FD9F75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		60AEE68F20DC6BDC00AC61AD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				60AEE69020DC6C0300AC61AD /* UserDefaults.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,6 +139,7 @@
 				6023F1221F91FFD100D6581D /* Sources */,
 				6023F1231F91FFD100D6581D /* Frameworks */,
 				6023F1241F91FFD100D6581D /* Resources */,
+				6065C14820E087C200FD9F75 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -118,7 +157,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Fr3qFly;
 				TargetAttributes = {
 					6023F1251F91FFD100D6581D = {
@@ -159,18 +198,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6065C14820E087C200FD9F75 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6023F1221F91FFD100D6581D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				601B20681F9AAF9700DB8C8B /* CircleChart.swift in Sources */,
+				60AEE68E20DC647700AC61AD /* DataHandler.swift in Sources */,
 				600AF24F1FAECB34005464FC /* WindDataTableViewCell.swift in Sources */,
 				6023F1411F92C28000D6581D /* Accessories.swift in Sources */,
-				6023F13F1F92003F00D6581D /* WindData.swift in Sources */,
+				6023F13F1F92003F00D6581D /* MeasurementData.swift in Sources */,
 				600AF24D1FAEBC75005464FC /* UsedColors.swift in Sources */,
 				601B20661F9AAF8200DB8C8B /* LineChart.swift in Sources */,
 				6023F12C1F91FFD100D6581D /* ViewController.swift in Sources */,
+				60AEE69120DC6C0300AC61AD /* UserDefaults.swift in Sources */,
 				6023F12A1F91FFD100D6581D /* AppDelegate.swift in Sources */,
 				6023F1321F91FFD100D6581D /* WindTendency.xcdatamodeld in Sources */,
 				601B206A1F9B405B00DB8C8B /* CircleChartPoint.swift in Sources */,
@@ -213,6 +272,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -220,6 +280,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -270,6 +331,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -277,6 +339,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -312,6 +375,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VWUE9JZKY9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = WindTendency/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Fr3qfly.WindTendency;
@@ -327,6 +394,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VWUE9JZKY9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = WindTendency/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Fr3qfly.WindTendency;

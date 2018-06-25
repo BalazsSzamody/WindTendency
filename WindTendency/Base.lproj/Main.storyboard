@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -37,12 +37,41 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrM-Vt-V3h">
-                                <rect key="frame" x="320" y="35" width="40" height="30"/>
-                                <state key="normal" title="JSON"/>
+                                <rect key="frame" x="326" y="35" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
                                 <connections>
-                                    <action selector="jsonButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y9y-IV-w9s"/>
+                                    <action selector="saveButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3zc-Eo-pXL"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7k-CM-JU6" customClass="LineChart" customModule="WindTendency" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="395" width="375" height="232"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eim-Fl-qEY" userLabel="ButtonView">
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRG-4D-le5">
+                                        <rect key="frame" x="127" y="0.0" width="120" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="TRG-4D-le5" secondAttribute="height" multiplier="3:1" id="u8C-dv-bIb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="New"/>
+                                        <connections>
+                                            <action selector="newButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fcE-Va-kmE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.87058823529411766" green="0.33333333333333331" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="TRG-4D-le5" firstAttribute="height" secondItem="eim-Fl-qEY" secondAttribute="height" id="2tT-8f-Kbn"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ndc-eG-9vC"/>
+                                    <constraint firstItem="TRG-4D-le5" firstAttribute="centerX" secondItem="eim-Fl-qEY" secondAttribute="centerX" id="kYV-mQ-1VX"/>
+                                    <constraint firstItem="TRG-4D-le5" firstAttribute="centerY" secondItem="eim-Fl-qEY" secondAttribute="centerY" id="oqs-Xc-VO2"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-qR-Fyc">
                                 <rect key="frame" x="15" y="35" width="345" height="617"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.64313725490196072" blue="0.46666666666666667" alpha="0.79648987676056338" colorSpace="calibratedRGB"/>
@@ -88,35 +117,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7k-CM-JU6" customClass="LineChart" customModule="WindTendency" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="395" width="375" height="232"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eim-Fl-qEY" userLabel="ButtonView">
-                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRG-4D-le5">
-                                        <rect key="frame" x="127" y="0.0" width="120" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="TRG-4D-le5" secondAttribute="height" multiplier="3:1" id="u8C-dv-bIb"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="New"/>
-                                        <connections>
-                                            <action selector="newButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fcE-Va-kmE"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.87058823529411766" green="0.33333333333333331" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="TRG-4D-le5" firstAttribute="height" secondItem="eim-Fl-qEY" secondAttribute="height" id="2tT-8f-Kbn"/>
-                                    <constraint firstAttribute="height" constant="40" id="Ndc-eG-9vC"/>
-                                    <constraint firstItem="TRG-4D-le5" firstAttribute="centerX" secondItem="eim-Fl-qEY" secondAttribute="centerX" id="kYV-mQ-1VX"/>
-                                    <constraint firstItem="TRG-4D-le5" firstAttribute="centerY" secondItem="eim-Fl-qEY" secondAttribute="centerY" id="oqs-Xc-VO2"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHz-MN-oUp">
                                 <rect key="frame" x="0.0" y="447" width="375" height="220"/>
                                 <subviews>
@@ -137,6 +137,18 @@
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="hy0-5M-Vnc"/>
+                                            <barButtonItem title="Rnd" id="Zwn-M6-oqJ">
+                                                <connections>
+                                                    <action selector="rndButtonPressed:" destination="BYZ-38-t0r" id="62j-FG-NgW"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="xzT-Gi-SFn"/>
+                                            <barButtonItem title="Spr" id="38k-zs-U6J">
+                                                <connections>
+                                                    <action selector="sprButtonPressed:" destination="BYZ-38-t0r" id="NO3-Vk-ZOa"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="dbk-fL-NmJ"/>
                                         </items>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="barTintColor" red="0.87058823529411766" green="0.33333333333333331" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -198,11 +210,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zK9-1v-qlz" secondAttribute="trailing" id="oTq-Yv-iuR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="YD1-qR-Fyc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="circleChart" destination="zK9-1v-qlz" id="P42-2H-y3n"/>

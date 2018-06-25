@@ -49,7 +49,7 @@ class LineChart: UIView {
     var xMin: CGFloat = 0
     var yMax: CGFloat = 100
     var yMin: CGFloat = 0
-    var data: [WindData]?
+    var data: [MeasurementData]?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -211,7 +211,7 @@ class LineChart: UIView {
         context.restoreGState()
     }
     
-    func plot(_ input: [WindData]) {
+    func plot(_ input: [MeasurementData]) {
         lineLayer.path = nil
         circleLayer.path = nil
         
@@ -254,7 +254,7 @@ class LineChart: UIView {
         return path
     }
     
-    func convertToPoint(_ input: [WindData]?) -> [CGPoint]? {
+    func convertToPoint(_ input: [MeasurementData]?) -> [CGPoint]? {
         guard let input = input else { return nil }
         guard !input.isEmpty else { return nil }
         var points: [CGPoint] = []
