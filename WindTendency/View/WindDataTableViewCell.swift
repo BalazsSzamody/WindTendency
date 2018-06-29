@@ -8,23 +8,12 @@
 
 import UIKit
 
-
-
-
 class WindDataTableViewCell: UITableViewCell {
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var windData: MeasurementData? {
-        didSet{
-            guard let windData = windData else { return }
-            directionLabel.text = "\(windData.direction)"
-            speedLabel.text = "\(windData.speed)"
-            
-            dateLabel.text = windData.formatDate(format: .letters)
-        }
-    }
+    var windData: MeasurementData?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,11 +26,9 @@ class WindDataTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func formatDate(_ date: Date) -> String {
-        let dateFormatter =  DateFormatter()
-        dateFormatter.locale = Locale(identifier: "hu_HU")
-        dateFormatter.setLocalizedDateFormatFromTemplate(DateFormats.letters.rawValue)
-        
-        return dateFormatter.string(from: date)
+    func configure(with viewModel: WindDataCellViewModel) {
+        directionLabel.text = viewModel.directionLabel
+        speedLabel.text = viewModel.speedLabel
+        dateLabel.text = viewModel.dateLabel
     }
 }

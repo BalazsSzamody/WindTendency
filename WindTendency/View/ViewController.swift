@@ -19,25 +19,8 @@ class ViewController: UIViewController {
     
     var speedPickerData: [[String]] = []
     var directionPickerData: [[String]] = []
-    var windData: [MeasurementData] = [] {
-        didSet{
-            if windData.isEmpty {
-                CircleChart.max = 3600
-                circleChart.circleSizeMultiplier = 0
-                lineChart.xMax = 3600
-                lineChart.yMax = 100
-                lineChart.circleSizeMultiplier = 0
-                let startWind = MeasurementData(rawDirection: 0, speed: 0, date: Date())
-                chartWind([startWind])
-                dataTableButton.isHidden = true
-            } else {
-                circleChart.circleSizeMultiplier = 5
-                lineChart.circleSizeMultiplier = 5
-                chartWind(windData)
-                dataTableButton.isHidden = false
-            }
-        }
-    }
+    
+    var viewModel: ViewViewModel = ViewViewModel()
     
     var entryDate: Date?
     var entryDirection: CGFloat?
@@ -46,21 +29,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // viewModel setup
+        viewModel.chartSetup(speedChart: lineChart, directionChart: circleChart)
         // Do any additional setup after loading the view, typically from a nib.
         circleChart.backgroundColor = UsedColors.graphBackgroundColor
         lineChart.backgroundColor = UsedColors.graphBackgroundColor
         newEntryView.isHidden = true
         pickerProtocolSetup()
-        windData = []
         windDataTableView.delegate = self
         windDataTableView.dataSource = self
         windDataTableView.isHidden = true
         windDataTableView.layer.cornerRadius = 10
         windDataTableView.layer.borderColor = UsedColors.darkOrange.cgColor
         windDataTableView.layer.borderWidth = 2
-        
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -89,11 +70,11 @@ class ViewController: UIViewController {
             newEntryIsVisible()
             return
         }
-        windData.append(MeasurementData(rawDirection: direction, speed: speed, date: date))
+        viewModel.addMeasurement(MeasurementData(direction: direction, speed: speed, date: date))
         newEntryIsVisible()
     }
     @IBAction func resetButtonPressed(_ sender: Any) {
-        windData = []
+        viewModel.resetData()
         newEntryIsVisible()
     }
     
@@ -104,114 +85,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        exportWindData(sender)
+        if viewModel.windData.data.isEmpty {
+            viewModel.load()
+        } else {
+            viewModel.save()
+        }
     }
     
     @IBAction func rndButtonPressed(_ sender: Any) {
-        windData = windDataSimulation(dataCount: 30, directionAlgo: followingRandom(_:), startAngle: 10, speedAlgo: followingRandom(_:), startSpeed: 10)
+        viewModel.getRandomChart(50)
         newEntryIsVisible()
     }
     
     @IBAction func sprButtonPressed(_ sender: Any) {
-        windData = windDataSimulation(dataCount: 30, directionAlgo: linearChange(_:), startAngle: 10, speedAlgo: followingRandom(_:), startSpeed: 10)
+        viewModel.getSpiralChart(50)
         newEntryIsVisible()
-    }
-    
-    func chartWind(_ windData: [MeasurementData]) {
-        lineChart.plot(windData)
-        circleChart.plot(windData)
-    }
-    
-    func windDataSimulation(directionAlgo: (CGFloat) -> CGFloat, speedAlgo: (CGFloat) -> CGFloat) -> MeasurementData {
-        var direction: CGFloat
-        var speed: CGFloat
-        var date: Date
-        if !windData.isEmpty{
-            direction = windData[windData.count - 1].direction
-            speed = windData[windData.count - 1].speed
-            date = windData[windData.count - 1].date.addingTimeInterval(120)
-        } else {
-            date = Date()
-            direction = CGFloat(drand48()) * 360
-            speed = CGFloat(drand48()) * 30
-        }
-        speed = speedAlgorithm(speedAlgo, input: speed)
-        direction = directionAlgo(direction)
-        
-        return MeasurementData(rawDirection: direction, speed: speed, date: date)
-    }
-    
-    func windDataSimulation(dataCount: Int, directionAlgo: (CGFloat) -> CGFloat, startAngle: CGFloat, speedAlgo: (CGFloat) -> CGFloat, startSpeed: CGFloat) -> [MeasurementData] {
-        var data: [MeasurementData] = []
-        var angle: CGFloat = startAngle
-        var speed: CGFloat = startSpeed
-        for i in 0 ... dataCount {
-            if i != 0 {
-                let newDate = data[0].date.addingTimeInterval(TimeInterval(i) * 120)
-                data.append(MeasurementData(rawDirection: angle, speed: speed, date: newDate))
-            } else {
-                data.append(MeasurementData(rawDirection: angle, speed: speed, date: Date()))
-            }
-            
-            speed = speedAlgorithm(speedAlgo, input: speed)
-            angle = directionAlgo(angle)
-        }
-        return data
-    }
-    
-    func speedAlgorithm(_ speedAlgo: (CGFloat) -> CGFloat, input: CGFloat) -> CGFloat {
-        var speed: CGFloat = speedAlgo(input)
-        while speed < 0 {
-            speed = speedAlgo(input)
-        }
-        
-        return speed
-    }
-    
-    func linearChange(_ input: CGFloat) -> CGFloat {
-        return input + 5
-    }
-    
-    func followingRandom(_ input: CGFloat) -> CGFloat {
-        let random = drand48()
-        switch random {
-        case 0 ..< 0.125:
-            return input - CGFloat(arc4random_uniform(20))
-        case 0.125 ..< 0.25:
-            return input - CGFloat(arc4random_uniform(15))
-        case 0.25 ..< 0.375:
-            return input - CGFloat(arc4random_uniform(10))
-        case 0.375 ..< 0.5:
-            return input - CGFloat(arc4random_uniform(5))
-        case 0.5 ..< 0.625:
-            return input + CGFloat(arc4random_uniform(5))
-        case 0.625 ..< 0.75:
-            return input + CGFloat(arc4random_uniform(10))
-        case 0.75 ..< 0.875:
-            return input + CGFloat(arc4random_uniform(15))
-        case 0.875 ..< 1:
-            return input + CGFloat(arc4random_uniform(20))
-        default:
-            return input
-        }
-    }
-    
-    func peeked(_ input: CGFloat) -> CGFloat {
-        if !PeekAlgo.reachedPeek {
-            if input >= PeekAlgo.peek - 5 {
-                PeekAlgo.reachedPeek = true
-            }
-            return input + 5
-        } else {
-            if input <= 6 {
-                PeekAlgo.reachedPeek = false
-            }
-            return input - 5
-        }
-    }
-    
-    func resetGraphs() {
-        windData = []
     }
 }
 
@@ -346,12 +234,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return windData.count
+        return viewModel.windData.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "windDataCell", for: indexPath) as! WindDataTableViewCell
-        cell.windData = windData[indexPath.row]
+        
+        let cellViewModel = viewModel.getCellViewModel(for: indexPath.row)
+        cell.configure(with: cellViewModel)
         
         return cell
     }
@@ -370,34 +260,5 @@ extension ViewController {
     func tableViewIsVisible() {
         windDataTableView.isHidden = true
         dataTableButton.isHidden = false
-    }
-}
-
-extension ViewController {
-    func exportWindData(_ sender: Any) {
-        /*
-        let convertedWindData = WindData.convertToJSONObject(windData) as AnyObject
-        let json = WindData.jsonStringify(convertedWindData)
-        guard let saveURL = WindData.exportToFileURL(json) else {
-            print("Saving Failed")
-            return
-        }
-        */
-        guard let saveURL = MeasurementData.exportJSON(windData) else {
-            print("Saving Failed")
-            return
-        }
-        
-        let activityViewController = UIActivityViewController(activityItems: ["JSON name: \(saveURL)",saveURL], applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-            print("Activity:", activity, " Success:", success, " Items:", items, " Error:", error)
-            do{
-                try FileManager.default.removeItem(at: saveURL)
-                print("File deleted")
-            } catch {
-                print("File not deleted")
-            }
-        }
-        present(activityViewController, animated: true, completion: nil)
     }
 }

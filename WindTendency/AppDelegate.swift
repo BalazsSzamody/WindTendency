@@ -19,27 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        guard url.pathExtension == "json" else {
-            print("Not json")
-            return false }
-        
-        guard let allWindData = MeasurementData.importWithURLSession(from: url, completion: MeasurementData.handleImportedJSON(_:)) else {
-            print("No windData")
-            return false
-            
-        }
-        
-        guard let viewController = window?.rootViewController as? ViewController else {
-            print("ViewController not found")
-            return true
-            
-        }
-        
-        viewController.windData = allWindData
-        return true
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

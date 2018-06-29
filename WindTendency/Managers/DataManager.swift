@@ -8,8 +8,8 @@
 
 import Foundation
 
-class DataHandler {
-    static let shared = DataHandler()
+class DataManager {
+    static let shared = DataManager()
     
     let encoder = JSONEncoder()
     
