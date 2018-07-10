@@ -27,7 +27,6 @@ struct TestDataFactory {
     let startSpeed: CGFloat
     
     var testData: WindData {
-        let name = "Test Data"
         let testData: [MeasurementData]
         switch type {
         case .random:
@@ -38,7 +37,7 @@ struct TestDataFactory {
             testData = peekedWindData()
         }
         
-        return WindData(spotName: name, data: testData)
+        return WindData(data: testData)
     }
     
     func randomWindData() -> [MeasurementData] {

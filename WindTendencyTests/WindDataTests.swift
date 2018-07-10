@@ -23,19 +23,6 @@ class WindDataTests: XCTestCase {
         super.tearDown()
     }
     
-    func testSpotName() {
-        let expected = "Test Location"
-        
-        XCTAssertEqual(windData.spotName, expected)
-    }
-    
-    func testSetSpotName() {
-        let expected = "Test Spot"
-        windData.setSpotName(expected)
-        
-        XCTAssertEqual(windData.spotName, expected)
-    }
-    
     func testFirstData() {
         let expectedWindDirection = CGFloat(45.0)
         let expectedWindSpeed = CGFloat(10.0)

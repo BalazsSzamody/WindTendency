@@ -10,25 +10,22 @@ import Foundation
 import UIKit
 
 struct WindData: Codable {
-    var spotName: String
-    var data: [MeasurementData]
+    private var _data: [MeasurementData]
     
-    init(spotName: String, data: [MeasurementData]) {
-        self.spotName = spotName
-        self.data = data
+    var data: [MeasurementData] {
+        return _data
+    }
+    
+    init(data: [MeasurementData]) {
+        self._data = data
     }
     
     init() {
-        spotName = ""
-        data = []
-    }
-    
-    mutating func setSpotName(_ name: String) {
-        spotName = name
+        _data = []
     }
     
     mutating func addMeasurement(_ data: MeasurementData) {
-        self.data.append(data)
+        self._data.append(data)
     }
 }
 

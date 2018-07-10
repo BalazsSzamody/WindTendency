@@ -21,8 +21,7 @@ struct StubWindData {
         
         let data = measurementWithDate.map { MeasurementData(direction: $0.0, speed: $0.1, date: $0.2)}
         
-        let name = "Test Location"
         
-        return WindData(spotName: name, data: data)
+        return WindData(data: data)
     }
 }

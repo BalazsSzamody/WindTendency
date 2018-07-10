@@ -10,4 +10,6 @@ import Foundation
 
 struct UserDefaultKeys {
     static let windDataKey: String = "windData"
+    
+    static let locationsKey: String = "locations"
 }

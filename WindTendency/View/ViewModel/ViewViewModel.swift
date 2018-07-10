@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 struct ViewViewModel {
+    
+    var location: Location?
+    
     var windData: WindData = WindData() {
         didSet{
             guard speedChart != nil, directionChart != nil else {
@@ -26,7 +29,7 @@ struct ViewViewModel {
     
     
     var spotName: String {
-        return windData.spotName
+        return location?.name ?? ""
     }
     
     mutating func addMeasurement(_ data: MeasurementData) {
@@ -40,6 +43,7 @@ struct ViewViewModel {
     }
     
     mutating func resetData() {
+        location = nil
         windData = WindData()
     }
     

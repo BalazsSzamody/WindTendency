@@ -22,6 +22,7 @@ class ViewViewModelTests: XCTestCase {
         super.setUp()
         
         viewModel.chartSetup(speedChart: lineChart, directionChart: circleChart)
+        viewModel.location = Location("Test Location", coordinates: (10.0, 20.0))
         viewModel.windData = windData
     }
     
@@ -37,11 +38,10 @@ class ViewViewModelTests: XCTestCase {
     
     func testResetData() {
         let expectedCount = 0
-        let expectedName = ""
         viewModel.resetData()
         
         XCTAssertEqual(viewModel.windData.data.count, expectedCount)
-        XCTAssertEqual(viewModel.windData.spotName, expectedName)
+        XCTAssertNil(viewModel.location)
     }
     
     func testSpeedChartNotNil() {
